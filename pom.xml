@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>com.x</groupId>
-		<artifactId>xframework-deploy</artifactId>
+		<artifactId>xframework-parent</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
@@ -11,11 +11,6 @@
 	<packaging>jar</packaging>
 
     <dependencies>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.2.47</version>
-		</dependency>
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
