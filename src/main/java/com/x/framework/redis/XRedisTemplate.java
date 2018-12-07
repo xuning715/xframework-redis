@@ -1,16 +1,13 @@
 package com.x.framework.redis;
 
 import com.alibaba.fastjson.JSON;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.stereotype.Service;
 
 import java.util.concurrent.TimeUnit;
 
-@Service
 public class XRedisTemplate {
 
     private final static String star = "*";
@@ -18,11 +15,14 @@ public class XRedisTemplate {
     private final static String blank = "";
     private final static String SERVICE_KEY = "SERVICE_KEY";
 
-    @Autowired
     private RedisTemplate redisTemplate;
 
     public XRedisTemplate() {
         System.out.println("====================XRedisTemplate has been inited=======================");
+    }
+
+    public void setRedisTemplate(RedisTemplate redisTemplate) {
+        this.redisTemplate = redisTemplate;
     }
 
     public String get(String key) {
