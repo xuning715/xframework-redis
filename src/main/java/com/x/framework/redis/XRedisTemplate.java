@@ -51,32 +51,43 @@ public class XRedisTemplate {
         return value;
     }
 
-    public String set(String key, Object value) {
+    public void setString(String key, String value) {
+        key = key.replaceAll(colon, blank);
+        if (value != null && value.length() > 0) {
+            ValueOperations<String, String> keyValue = redisTemplate.opsForValue();
+            keyValue.set(key, value);
+        }
+    }
+
+    public String setObject(String key, Object value) {
         String json = null;
         try {
             key = key.replaceAll(colon, blank);
             if (value != null) {
                 json = JSON.toJSONString(value);
-            }
-            if (json != null && json.length() > 0) {
-                ValueOperations<String, String> keyValue = redisTemplate.opsForValue();
-                keyValue.set(key, json);
+                this.setString(key, json);
             }
         } finally {
             return json;
         }
     }
 
-    public String set(String key, Object value, int expireSeconds) {
+    public void setString(String key, String value, int expireSeconds) {
+        key = key.replaceAll(colon, blank);
+        if (value != null && value.length() > 0) {
+            ValueOperations<String, String> keyValue = redisTemplate.opsForValue();
+            keyValue.set(key, value);
+            keyValue.set(key, value, expireSeconds, TimeUnit.SECONDS);
+        }
+    }
+
+    public String setObject(String key, Object value, int expireSeconds) {
         String json = null;
         try {
             key = key.replaceAll(colon, blank);
             if (value != null) {
                 json = JSON.toJSONString(value);
-            }
-            if (json != null && json.length() > 0) {
-                ValueOperations<String, String> keyValue = redisTemplate.opsForValue();
-                keyValue.set(key, json, expireSeconds, TimeUnit.SECONDS);
+                this.setString(key, json, expireSeconds);
             }
         } finally {
             return json;
